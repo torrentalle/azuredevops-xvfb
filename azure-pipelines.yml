@@ -1,0 +1,51 @@
+jobs:
+  - job: Test
+    pool:
+      name: Hosted Ubuntu 1604
+      demands: npm
+    steps:
+      - task: NodeTool@0
+        displayName: 'Use Node 10.x'
+        inputs:
+          versionSpec: 10.x
+      - task: Npm@1
+        displayName: 'Install dependencies'
+        inputs:
+          verbose: false
+      - task: Npm@1
+        displayName: 'Compile sources'
+        inputs:
+          command: custom
+          verbose: false
+          customCommand: 'run build'
+      - task: Npm@1
+        displayName: 'Run tests'
+        inputs:
+          command: custom
+          verbose: false
+          customCommand: 'run test'  
+        env:
+          CODE_TESTS_REPORTER: xunit
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/TEST-*.xml'
+          mergeTestResults: true
+          testRunTitle: 'Extension Tests'
+        condition: always()
+      - task: Npm@1
+        displayName: 'Build package'
+        inputs:
+          command: custom
+          verbose: false
+          customCommand: 'run create'
+      - task: CopyFiles@2
+        displayName: 'Copy package package'
+        inputs:
+          Contents: '*.vsix'
+          TargetFolder: 'package/'
+          OverWrite: true
+      - task: PublishPipelineArtifact@0
+        inputs:
+          artifactName: 'package'
+          targetPath: 'package'
