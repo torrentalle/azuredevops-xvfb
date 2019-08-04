@@ -23,7 +23,7 @@ jobs:
         inputs:
           command: custom
           verbose: false
-          customCommand: 'run test'  
+          customCommand: 'run test-junit'  
         env:
           CODE_TESTS_REPORTER: xunit
       - task: PublishTestResults@2
