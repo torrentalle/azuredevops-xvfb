@@ -4,7 +4,7 @@
   "description": "Uee Xvfb to enable UI testing in Linux",
   "scripts": {
     "test": "mocha tests/_suite.js",
-    "test-junit": "mocha --reporter xunit tests/_suite.js",
+    "test-junit": "mocha --reporter xunit --reporter-option output=reports/TEST-extension.xml tests/_suite.js",
     "install": "cd tasks/StartXvfb && npm install",
     "build": "tsc -p ./",
     "create": "tfx extension create"
