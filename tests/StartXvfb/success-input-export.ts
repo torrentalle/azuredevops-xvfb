@@ -24,4 +24,6 @@ let a: ma.TaskLibAnswers = <ma.TaskLibAnswers> {
 };
 tmr.setAnswers(a)
 
+tmr.setInput('exportDisplay', 'false');
+
 tmr.run();

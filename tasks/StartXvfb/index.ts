@@ -4,6 +4,7 @@ import tr = require('azure-pipelines-task-lib/toolrunner');
 const daemonToolPath = "/sbin/start-stop-daemon";
 const defaultDisplay = "99"
 const defaultScreen = "1280x1024x8"
+const defaultExport = true
 
 async function run() {
 
@@ -12,8 +13,8 @@ async function run() {
         console.log('Starting Xvfb daemon');
        
         // Start daemon  
-        var executed:Boolean = await xvfbStart();
-        if (! executed ) {
+        const display = await xvfbStart();
+        if ( display == null ) {
             tl.setResult(tl.TaskResult.Failed, 'Cannot start Xvfb daemon');
             return;
         }
@@ -24,11 +25,13 @@ async function run() {
             tl.setResult(tl.TaskResult.Failed, 'Xvfb daemon stopped unexpectedly');
             return;
         }
+        console.log('Xvfb daemon started in display :' + display );
 
         // Publish variable for the rest of tasks
-        const display = getDisplay()
-        tl.setTaskVariable("DISPLAY", ':' + display )
-        console.log('Xvfb daemon started in display :' + display );
+        if (getExport()) {
+            tl.setTaskVariable("DISPLAY", ':' + display )
+            console.log('Set Task Variable DISPLAY=":' + display +'"');
+        }
 
     }
     catch (err) {
@@ -37,9 +40,11 @@ async function run() {
 }
 
 
-async function xvfbStart():Promise<Boolean> {
+async function xvfbStart():Promise<String|null> {
 
     const display = getDisplay();
+    const screen = getScreen();
+
     const pidfile = '/tmp/custom_xvfb_'+display+'.pid';
 
     var start:tr.ToolRunner = tl.tool(daemonToolPath)
@@ -48,12 +53,12 @@ async function xvfbStart():Promise<Boolean> {
         .arg(['--make-pidfile','--pidfile', pidfile])
         .arg(['--exec', '/usr/bin/Xvfb'])
         .arg('--')
-        .arg([':'+display])
+        .arg([':' + display])
         .arg('-ac')
-        .arg(['-screen', '0', getScreen()])
+        .arg(['-screen', '0', screen])
     var code: number = await start.exec();
 
-    return code === 0;
+    return code === 0? display : null;
 }
 
 async function xvfbStatus():Promise<Boolean> {
@@ -99,6 +104,19 @@ function getScreen(): string {
     }
 
     return screen;
+}
+
+function getExport() {
+    // Get Display value
+    let exportDisplay;
+    try {
+        exportDisplay = tl.getBoolInput('exportDisplay', true);
+    } catch {
+        exportDisplay = defaultExport
+    }
+ 
+    return exportDisplay;
+
 }
 
 function delay(ms: number) {
