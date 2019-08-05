@@ -7,7 +7,7 @@ This fature makes easies UI testing in Linux environments
 
 ## Building
 
-You need node 10.x or grather to build trhis extension
+You need node 10.x or grather to build this extension
 
 ```bash
 npm install
@@ -24,8 +24,6 @@ Be sure to manually increment the version number befor executing the create step
 After installing dependencies and build the packagem you can create `vsix` package.
 
 ```bash
-npm install
-npm run build
 npm run create
 ```
 
