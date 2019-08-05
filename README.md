@@ -1,5 +1,7 @@
 # Xvfb extension for Azure DevOps
 
+[![Build Status](https://dev.azure.com/torrentalle/azuredevops-xvfb/_apis/build/status/torrentalle.azuredevops-xvfb?branchName=master)](https://dev.azure.com/torrentalle/azuredevops-xvfb/_build/latest?definitionId=2&branchName=master)
+
 This Azure DevOps extension adds new build tasks to manage and run Xvfm inside Build Agents.
 
 This fature makes easies UI testing in Linux environments
