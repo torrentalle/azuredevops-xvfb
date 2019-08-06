@@ -39,7 +39,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/Xvfb0"
+                "name": "tasks/XvfbV0"
             }
         }
     ]
