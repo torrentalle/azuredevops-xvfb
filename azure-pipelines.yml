@@ -23,7 +23,7 @@ jobs:
         inputs:
           command: custom
           verbose: false
-          customCommand: 'run test-junit'  
+          customCommand: 'run --verbose test-junit'  
       - task: PublishTestResults@2
         inputs:
           testResultsFormat: 'JUnit'
