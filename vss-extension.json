@@ -2,13 +2,13 @@
     "manifestVersion": 1,
     "id": "xvfb",
     "name": "Xvfb",
-    "version": "0.0.4",
+    "version": "0.0.1",
     "publisher": "torrentalle",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
-    ],    
+    ],
     "description": "Use Xvfb in Linux Agents to allow UI testing",
     "categories": [
         "Azure Pipelines"
@@ -23,22 +23,23 @@
     "tags": [
         "Xvfb",
         "X",
-        "X-Windows"
+        "X-Windows",
+        "xfv-run"
     ],
     "files": [
         {
-            "path": "tasks/StartXvfb"
+            "path": "tasks/Xvfb0"
         }
     ],
     "contributions": [
         {
-            "id": "start-xvfb-task",
+            "id": "6f9b0bff-67f3-4290-835c-8d5ef68c23bb",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/StartXvfb"
+                "name": "tasks/Xvfb0"
             }
         }
     ]
