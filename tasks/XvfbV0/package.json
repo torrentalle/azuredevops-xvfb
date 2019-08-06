@@ -1,0 +1,9 @@
+{
+  "name": "xvfb",
+  "version": "0.0.1",
+  "description": "Xvfb",
+  "main": "index.js",
+  "dependencies": {
+    "azure-pipelines-task-lib": "^2.8.0"
+  }
+}
