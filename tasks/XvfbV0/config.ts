@@ -68,7 +68,7 @@ export class XvfbConfig {
 
     set screen( screen: XvfbScreen) {
         if (screen.height <= 0 || screen.width <= 0 || screen.depth <= 0) {
-            throw Error("resolution must be grather than 0. " + this.resolution);
+            throw Error("resolution must be grather than 0.");
         }
         this._screen = screen;
     }

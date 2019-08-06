@@ -39,19 +39,19 @@ describe('Start Xvfv task tests', function () {
 
         assert.throws( ()=> {
             testConfig.resolution = "102476816"
-        }, "screen format must be 'WxHxD'", "should thrown and error passing bad resolution format");
+        }, /screen format must be 'WxHxD'/, "should thrown and error passing bad resolution format");
 
         assert.throws( ()=> {
             testConfig.resolution = "102476816"
-        }, "screen format must be 'WxHxD'", "should thrown and error passing bad resolution format");
+        }, /screen format must be 'WxHxD'/, "should thrown and error passing bad resolution format");
 
         assert.throws( ()=> {
             testConfig.screen = { width: -1, height: -1, depth: -1}
-        }, "resolution must be grather than 0. -1x-1x-1", "should thrown and error if screen resolution is negative");
+        }, /resolution must be grather than 0/, "should thrown and error if screen resolution is negative");
 
         assert.throws( ()=> {
             testConfig.display = -1
-        }, "display must be grather than 0", "should thrown and error if display is negative");
+        }, /display must be grather than 0/, "should thrown and error if display is negative");
         
         assert.equal(testConfig.display, defaultDisplay, "should use default display if isNaN")
 
