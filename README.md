@@ -1,10 +1,16 @@
 # Xvfb extension for Azure DevOps
 
-[![Build Status](https://dev.azure.com/torrentalle/azuredevops-xvfb/_apis/build/status/torrentalle.azuredevops-xvfb?branchName=master)](https://dev.azure.com/torrentalle/azuredevops-xvfb/_build/latest?definitionId=2&branchName=master)
+[![Build Status](https://dev.azure.com/torrentalle/vsts-xvfb/_apis/build/status/torrentalle.vsts-xvfb?branchName=master)](https://dev.azure.com/torrentalle/azuredevops-xvfb/_build/latest?definitionId=2&branchName=master)
 
-This Azure DevOps extension adds new build tasks to manage and run Xvfm inside Build Agents.
+## Overview
 
-This fature makes easies UI testing in Linux environments
+This extension installs a Build/Release task that can be used to manage [Xvfb](https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml)
+in Linux agent machines. This is useful when running UI tests such as Selenium or Coded UI test
+
+The task can start Xvfb daemon and configure subsequent tasks to automatically use the X display. You can also specify custom screen resolution values by providing desired width and height, in pixels.
+
+## Getting started
+
 
 
 ## Building
