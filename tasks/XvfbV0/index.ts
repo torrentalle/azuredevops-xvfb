@@ -3,7 +3,7 @@ import { XvfbConfig } from './config';
 import { Daemon } from './daemon';
 import { isNull } from 'util';
 
-
+var debugArgs = process.argv.slice(2);
 
 async function run() {
 
@@ -13,7 +13,7 @@ async function run() {
         xvfbConfig.resolution = tl.getInput('screenSize', false);
         xvfbConfig.display = parseInt(tl.getInput('display', false));        
 
-        let action = tl.getInput('action', false);
+        let action = debugArgs.length > 0 ? debugArgs[0]: tl.getInput('action', false);
 
         switch (action) {
             case  'start': {
