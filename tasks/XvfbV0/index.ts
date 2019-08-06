@@ -13,7 +13,7 @@ async function run() {
         xvfbConfig.resolution = tl.getInput('screenSize', false);
         xvfbConfig.display = parseInt(tl.getInput('display', false));        
 
-        let action = tl.getInput('action', true);
+        let action = tl.getInput('action', false);
 
         switch (action) {
             case  'start': {
