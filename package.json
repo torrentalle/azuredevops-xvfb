@@ -1,7 +1,7 @@
 {
   "name": "xvfb",
-  "version": "0.0.4",
-  "description": "Uee Xvfb to enable UI testing in Linux",
+  "version": "0.0.1",
+  "description": "Azure DevOps extension to manage Xvfm in Build tasks",
   "scripts": {
     "test": "mocha tests/_suite.js",
     "test-junit": "mocha --reporter xunit --reporter-option output=reports/TEST-extension.xml tests/_suite.js",
