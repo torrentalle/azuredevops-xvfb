@@ -11,9 +11,15 @@ let a: ma.TaskLibAnswers = <ma.TaskLibAnswers> {
             "code": 0,
             "stdout": "",
             "stderr": ""
+        },
+        "xdpyinfo -display :99": {
+            "code": 0,
+            "stdout": "",
+            "stderr": ""
         }
     }
 };
+
 tmr.setAnswers(a)
 tmr.setInput('action', 'start');
 tmr.setInput('exportDisplay', 'true');
