@@ -11,7 +11,7 @@ async function run() {
 
         var xvfbConfig: XvfbConfig = new XvfbConfig();              
         xvfbConfig.resolution = tl.getInput('screenSize', false);
-        xvfbConfig.display = parseInt(tl.getInput('display', true));
+        xvfbConfig.display = parseInt( debugArgs.length > 1 ? debugArgs[1] : tl.getInput('display', false));
 
         let action = debugArgs.length > 0 ? debugArgs[0]: tl.getInput('action', false);
         let actionResult;

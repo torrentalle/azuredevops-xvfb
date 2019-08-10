@@ -55,8 +55,8 @@
         {
             "groupName": "advanced",
             "name": "exportDisplay",
-            "label": "Use as default DISPLAY",
-            "helpMarkDown": "Set DISPLAY to :0 to make Xvfb available for subsequent steps belong to the same wrapper task",
+            "label": "Set DISPLAY variable",
+            "helpMarkDown": "Set DISPLAY variable make Xvfb available for subsequent steps belong to the same wrapper task",
             "visibleRule": "action = start || action = stop",
             "type": "boolean",
             "default": true
