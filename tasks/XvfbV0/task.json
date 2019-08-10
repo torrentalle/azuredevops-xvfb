@@ -68,7 +68,6 @@
             "label": "Display :",
             "defaultValue": "0",
             "required": false,
-            "visibleRule": "action = start && exportDisplay = false",
             "helpMarkDown": "X Display to open or close. Subsequent tasks should know this value in order to acces to Xvfb"
         },
         {

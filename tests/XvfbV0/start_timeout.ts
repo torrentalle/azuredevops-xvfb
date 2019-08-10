@@ -21,5 +21,6 @@ let a: ma.TaskLibAnswers = <ma.TaskLibAnswers> {
 };
 tmr.setAnswers(a)
 tmr.setInput('action', 'start');
+tmr.setInput('display', '0');
 
 tmr.run();

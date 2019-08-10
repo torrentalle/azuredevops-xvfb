@@ -18,5 +18,6 @@ tmr.setAnswers(a)
 
 tmr.setInput('action', 'stop');
 tmr.setInput('exportDisplay', 'true');
+tmr.setInput('display', '0');
 
 tmr.run();

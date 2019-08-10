@@ -11,7 +11,7 @@ async function run() {
 
         var xvfbConfig: XvfbConfig = new XvfbConfig();              
         xvfbConfig.resolution = tl.getInput('screenSize', false);
-        xvfbConfig.display = tl.getBoolInput('exportDisplay') ? 0: parseInt(tl.getInput('display', false));
+        xvfbConfig.display = parseInt(tl.getInput('display', true));
 
         let action = debugArgs.length > 0 ? debugArgs[0]: tl.getInput('action', false);
         let actionResult;
@@ -37,9 +37,11 @@ async function run() {
 }
 
 function setDisplay(display: number|null): void {
-    let value = isNull(display)? '' : ':' + display.toString();
-    tl.setTaskVariable("DISPLAY", value );
-    console.log('Set Task Variable DISPLAY='+value)
+    if (tl.getBoolInput('exportDisplay')) {
+        let value = isNull(display)? '' : ':' + display.toString();
+        tl.setTaskVariable("DISPLAY", value );
+        console.log('Set Task Variable DISPLAY='+value)    
+    }
 }
 
 async function startDaemon(config: XvfbConfig) {
