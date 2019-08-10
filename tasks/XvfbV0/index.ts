@@ -39,7 +39,7 @@ async function run() {
 function setDisplay(display: number|null): void {
     let exportDisplay: boolean = debugArgs.length > 2 ? debugArgs[2]=="1" : tl.getBoolInput('exportDisplay')
     
-    if (tl.getBoolInput('exportDisplay')) {
+    if (exportDisplay) {
         let value = isNull(display)? '' : ':' + display.toString();
         tl.setTaskVariable("DISPLAY", value );
         console.log('Set Task Variable DISPLAY='+value)    
