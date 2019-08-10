@@ -26,6 +26,9 @@
         "X-Windows",
         "xfv-run"
     ],
+    "galleryFlags": [
+        "Preview"
+    ],
     "files": [
         {
             "path": "tasks/XvfbV0"
