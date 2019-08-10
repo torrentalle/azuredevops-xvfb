@@ -1,15 +1,14 @@
 import { ToolRunner } from 'azure-pipelines-task-lib/toolrunner';
 
-const pidPrefix = '/tmp/start-stop-daemon_';
-
 interface DaemonRunner {
     (tool: string): ToolRunner;
 }
 
 export class Daemon {
 
-    public daemonControl:string = "/sbin/start-stop-daemon";
+    private daemonControl:string = "/sbin/start-stop-daemon";
     public background: boolean = false;
+    public pidPrefix = '/tmp/start-stop-daemon_';
     public arguments: Array<string> = [];
     public extraArguments: string = "";
     public pidId: number = 0;
@@ -35,51 +34,64 @@ export class Daemon {
 
 
     get pidfile(): string {
-        return pidPrefix + this.pidId.toString() +'.pid'
+        return this.pidPrefix + this.pidId.toString() +'.pid'
     }
 
 
     public async start() : Promise<boolean> {
-        var cmd = this.runner(this.daemonControl);
-        cmd.arg('--start');
-        cmd.arg(['--make-pidfile','--pidfile', this.pidfile]);
+
+        let args = ['--start', '--make-pidfile','--pidfile', this.pidfile];
+        let extraArgs = undefined;
+
         if (this.background) {
-            cmd.arg('--background')
+            args.push('--background')
         }
-        cmd.arg(['--exec', this.executable]);
+
+        args.push('--exec', this.executable);
         if (this.arguments.length >0 || this.extraArguments.length > 0) {
-            cmd.arg('--');
+            args.push('--');
             this.arguments.forEach(element => {
-                cmd.arg(element);
+                args.push(element);
             });
-            cmd.line(this.extraArguments);
+            extraArgs = this.extraArguments;
         }
-        
-        let code: number = await cmd.exec();
-    
-        return code === 0;
+
+        return await this.exec(this.daemonControl, args, extraArgs);
+
     }
 
     public async status() : Promise<boolean> {
-    
-        var status = this.runner(this.daemonControl)
-            .arg('--status')
-            .arg(['--pidfile', this.pidfile]);
-        var code: number = await status.exec();
-    
-        return code === 0;
+        
+        return await this.exec(
+            this.daemonControl,
+            ['--status','--pidfile', this.pidfile]
+        );
     }
 
+    public async exec(command: string, args?: Array<string>, extraArgs?: string) : Promise<boolean> {
+
+        var status = this.runner(command);
+        if (args !== undefined) {
+            args.forEach(value => {
+                status.arg(value);
+            });    
+        }
+        if (extraArgs !== undefined) {
+            status.line(extraArgs);
+        }
+        
+        let code = await status.exec();
+
+        return code == 0;
+        
+    }
 
     public async stop():Promise<boolean> {
+        return await this.exec(
+            this.daemonControl,
+            ['--stop', '--oknodo', '--remove-pidfile', '--pidfile', this.pidfile]
+        );
     
-        var stop  = this.runner(this.daemonControl)
-            .arg('--stop')
-            .arg('--oknodo')
-            .arg(['--remove-pidfile', '--pidfile', this.pidfile])
-        var code: number = await stop.exec();
-
-        return code === 0;
     }
 
 

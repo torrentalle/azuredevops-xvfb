@@ -7,7 +7,8 @@ interface XvfbScreen {
 }
 
 export class XvfbConfig {
-    
+
+    private socketPrefix:string = '/tmp/.X11-unix/X';   
     private _display:number = 99
     private _screen:XvfbScreen =  {
         width: 1280,
@@ -15,11 +16,16 @@ export class XvfbConfig {
         depth: 8
     }
 
+    public timeout:number = 10000;
     public xvfbPath:string = "/usr/bin/Xvfb";
+    public testCommand:string = "xdpyinfo";
     
-
     get display(): number {
         return this._display;
+    }
+
+    get socket(): string {
+        return this.socketPrefix + this.display.toString();
     }
 
     set display(display:number) {
@@ -73,9 +79,16 @@ export class XvfbConfig {
         this._screen = screen;
     }
 
-    public getArrayArguments():Array<string> {
+    get arguments():Array<string> {
         return [
             ':' + this.display.toString(), '-ac', '-screen', this.screennum, this.resolution
+        ]
+    }
+
+    get testArguments():Array<string> {
+        return [
+            '-display',
+            ':' + this.display.toString()
         ]
     }
 
