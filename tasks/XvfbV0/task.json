@@ -56,7 +56,7 @@
             "groupName": "advanced",
             "name": "exportDisplay",
             "label": "Set DISPLAY variable",
-            "helpMarkDown": "Set DISPLAY variable make Xvfb available for subsequent steps belong to the same wrapper task",
+            "helpMarkDown": "Set DISPLAY variable available to subsequent tasks as well.",
             "visibleRule": "action = start || action = stop",
             "type": "boolean",
             "default": true

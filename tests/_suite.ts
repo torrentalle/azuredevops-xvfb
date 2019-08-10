@@ -94,6 +94,7 @@ describe('XvfbV0 Task Start Tests', function () {
         assert.equal(tr.succeeded, true, 'should have succeeded');
         assert.equal(tr.warningIssues.length, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 0, "should have no errors");
+        assert.equal(tr.stdout.indexOf('Set Variable DISPLAY=:0') >= 0, true, "should display export message");
 
         done();
     });
@@ -109,6 +110,7 @@ describe('XvfbV0 Task Start Tests', function () {
         assert.equal(tr.succeeded, true, 'should have succeeded');
         assert.equal(tr.warningIssues.length, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 0, "should have no errors");
+        assert.equal(tr.stdout.indexOf('Set Variable DISPLAY=') ==-1, true, "should display export message");
 
         done();
     });
