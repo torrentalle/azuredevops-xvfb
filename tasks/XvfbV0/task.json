@@ -83,5 +83,9 @@
         "Node": {
             "target": "index.js"
         }
-    }
+    },
+    "OutputVariables": [{
+        "name" : "DISPLAY",
+        "description" : "Set DISPLAY variable according Xvfb settings"
+    }]
 }
