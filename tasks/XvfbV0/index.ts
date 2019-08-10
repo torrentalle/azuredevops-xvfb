@@ -42,6 +42,7 @@ function setDisplay(display: number|null): void {
     if (exportDisplay) {
         let value = isNull(display)? '' : ':' + display.toString();
         tl.setTaskVariable("DISPLAY", value );
+        tl.setVariable("DISPLAY", value);
         console.log('Set Task Variable DISPLAY='+value)    
     }
 }
