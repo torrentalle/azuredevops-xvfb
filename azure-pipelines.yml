@@ -24,8 +24,6 @@ jobs:
           command: custom
           verbose: false
           customCommand: 'run test-junit'  
-        env:
-          CODE_TESTS_REPORTER: xunit
       - task: PublishTestResults@2
         inputs:
           testResultsFormat: 'JUnit'
@@ -40,7 +38,7 @@ jobs:
           verbose: false
           customCommand: 'run create'
       - task: CopyFiles@2
-        displayName: 'Copy package package'
+        displayName: 'Copy package'
         inputs:
           Contents: '*.vsix'
           TargetFolder: 'package/'

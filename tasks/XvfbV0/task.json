@@ -1,0 +1,87 @@
+{
+    "id": "6f9b0bff-67f3-4290-835c-8d5ef68c23bb",
+    "name": "Xvfb",
+    "friendlyName": "xvfb",
+    "description": "Manage Xvfb and configure Linux agents to run UI tests",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "torrentalle",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 1
+    },
+    "runsOn": [
+        "Agent",
+        "DeploymentGroup"
+    ],
+    "instanceNameFormat": "Xvfb $(action)",
+    "groups": [
+        {
+            "displayName": "Advanced",
+            "name": "advanced",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [
+        {
+            "name": "action",
+            "label": "Action",
+            "helpMarkDown": "The action to execute with Xvfb.\n\nStart: the X server will be available by folowwing tasks.\n\nRun: execute specified command using xvfb-run",
+            "type": "pickList",
+            "required": true,
+            "options": {
+                "start": "Start",
+                "stop": "Stop"
+            },
+            "defaultValue": "start"
+        },
+        {
+            "name": "screenSize",
+            "type": "string",
+            "label": "Virtual Screen Size",
+            "defaultValue": "1280x1024x8",
+            "required": true,
+            "helpMarkDown": "Sets width, height, and depth to W, H, and D respectively. By default has the dimensions 1280x1024x8"
+        },
+        {
+            "name": "command",
+            "label": "Command and arguments",
+            "helpMarkDown": "Custom command to run using xvfb-run",
+            "type": "string",
+            "visibleRule": "action = run",
+            "required": true
+        },
+        {
+            "groupName": "advanced",
+            "name": "exportDisplay",
+            "label": "Set DISPLAY variable",
+            "helpMarkDown": "Set DISPLAY variable available to subsequent tasks as well.",
+            "visibleRule": "action = start || action = stop",
+            "type": "boolean",
+            "default": true
+        },
+        {
+            "name": "display",
+            "groupName": "advanced",
+            "type": "string",
+            "label": "Display :",
+            "defaultValue": "0",
+            "required": false,
+            "helpMarkDown": "X Display to open or close. Subsequent tasks should know this value in order to acces to Xvfb"
+        },
+        {
+            "groupName": "advanced",
+            "name": "extraArguments",
+            "label": "Arguments to pass to Xvfb",
+            "helpMarkDown": "Custom arguments to pass to executed commands.\n\n**Be careful!** Wrong parameters could make task execution fail",
+            "type": "string",
+            "required": false
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "index.js"
+        }
+    }
+}

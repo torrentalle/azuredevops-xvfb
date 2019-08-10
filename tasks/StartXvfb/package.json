@@ -1,9 +1,0 @@
-{
-  "name": "xvfb-start",
-  "version": "0.0.4",
-  "description": "Start Xvfb",
-  "main": "index.js",
-  "dependencies": {
-    "azure-pipelines-task-lib": "^2.8.0"
-  }
-}
