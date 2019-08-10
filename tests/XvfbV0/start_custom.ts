@@ -24,6 +24,6 @@ tmr.setAnswers(a)
 
 tmr.setInput('action', 'start');
 tmr.setInput('display', '33');
-tmr.setInput('exportDisplay', 'true');
+//tmr.setInput('exportDisplay', 'fale');
 
 tmr.run();

@@ -53,28 +53,29 @@
             "required": true
         },
         {
-            "name": "display",
-            "groupName": "advanced",
-            "type": "string",
-            "label": "Display",
-            "defaultValue": "99",
-            "required": false,
-            "helpMarkDown": "X Display to open."
-        },
-        {
             "groupName": "advanced",
             "name": "exportDisplay",
-            "label": "Set default DISPLAY",
-            "helpMarkDown": "Set default DISPLAY for subsequent steps belong to the same wrapper task",
+            "label": "Use as default DISPLAY",
+            "helpMarkDown": "Set DISPLAY to :0 to make Xvfb available for subsequent steps belong to the same wrapper task",
             "visibleRule": "action = start || action = stop",
             "type": "boolean",
             "default": true
         },
         {
+            "name": "display",
+            "groupName": "advanced",
+            "type": "string",
+            "label": "Display :",
+            "defaultValue": "0",
+            "required": false,
+            "visibleRule": "action = start && exportDisplay = false",
+            "helpMarkDown": "X Display to open or close. Subsequent tasks should know this value in order to acces to Xvfb"
+        },
+        {
             "groupName": "advanced",
             "name": "extraArguments",
-            "label": "Arguments to pass to Xvfb or xvfb-run",
-            "helpMarkDown": "Custom arguments to pass to executed commands.\n\nWrong parameters could break task execution",
+            "label": "Arguments to pass to Xvfb",
+            "helpMarkDown": "Custom arguments to pass to executed commands.\n\n**Be careful!** Wrong parameters could make task execution fail",
             "type": "string",
             "required": false
         }

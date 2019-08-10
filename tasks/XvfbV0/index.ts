@@ -8,33 +8,26 @@ var debugArgs = process.argv.slice(2);
 async function run() {
 
     try {
-        
+
         var xvfbConfig: XvfbConfig = new XvfbConfig();              
         xvfbConfig.resolution = tl.getInput('screenSize', false);
-        xvfbConfig.display = parseInt(tl.getInput('display', false));        
+        xvfbConfig.display = tl.getBoolInput('exportDisplay') ? 0: parseInt(tl.getInput('display', false));
 
         let action = debugArgs.length > 0 ? debugArgs[0]: tl.getInput('action', false);
-
+        let actionResult;
         switch (action) {
             case  'start': {
-                let s = await startDaemon(xvfbConfig);
-                if (s) {
-                    setDisplay(xvfbConfig.display);
-                    console.log('Xvfb daemon started in display :' + xvfbConfig.display );
-                }
+                actionResult = await startDaemon(xvfbConfig);
                 break;
             }
             case  'stop': {
-                let s = await stopDaemon(xvfbConfig);
-                if (s) {
-                    setDisplay(null);
-                    console.log('Xvfb daemon stopped' );
-                }
+                actionResult = await stopDaemon(xvfbConfig);
                 break;
             }
             default: {
                 tl.setResult(tl.TaskResult.Failed, 'Invalid action');    
             }
+            console.log('Xvfb daemon ' + action + ': ' + actionResult );
         }
     }
     catch (err) {
@@ -53,25 +46,9 @@ async function startDaemon(config: XvfbConfig) {
         tl.setResult(tl.TaskResult.Failed, 'Cannot start Xvfb daemon');
         return false;
     }
-    //return true;
+    
     return testDaemon(config,daemon);
 
-
-
-    // let now = new Date().getTime();
-    // let end = now + config.timeout;
-    // while (now < end) {
-    //     console.debug("Waiting for Xvfb to be ready")
-    //     await delay(500)
-    //     if (await daemon.exec(config.testCommand,config.testArguments)) {
-    //         console.log("Xvfb ready to get connections")
-    //         return result;
-    //     }
-    //     now = new Date().getTime();
-    // }
-    // tl.setResult(tl.TaskResult.Failed, 'Cannot start Xvfb daemon in ' + config.timeout.toString() + 'ms');
-
-    // return false;
 }
 
 async function testDaemon(config: XvfbConfig, daemon: Daemon): Promise<boolean>{
@@ -103,14 +80,6 @@ async function stopDaemon(config: XvfbConfig) {
     return result;
 }
 
-
-function setDisplay(display: number|null): void {
-    if (tl.getBoolInput('exportDisplay')) {
-        let value = isNull(display)? '' : ':' + display.toString();
-        tl.setTaskVariable("DISPLAY", value );
-        console.log('Set Task Variable DISPLAY='+value)
-    }
-}
 
 function createDaemon(config: XvfbConfig): Daemon {
     

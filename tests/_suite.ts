@@ -94,8 +94,6 @@ describe('XvfbV0 Task Start Tests', function () {
         assert.equal(tr.succeeded, true, 'should have succeeded');
         assert.equal(tr.warningIssues.length, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 0, "should have no errors");
-        assert.equal(tr.stdout.indexOf('Xvfb daemon started in display :99') >= 0, true, "should display started message");
-        assert.equal(tr.stdout.indexOf('Set Task Variable DISPLAY=:99') >= 0, true, "should display export message");
 
         done();
     });
@@ -111,8 +109,6 @@ describe('XvfbV0 Task Start Tests', function () {
         assert.equal(tr.succeeded, true, 'should have succeeded');
         assert.equal(tr.warningIssues.length, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 0, "should have no errors");
-        assert.equal(tr.stdout.indexOf('Xvfb daemon started in display :33') >= 0, true, "should display started message");
-        assert.equal(tr.stdout.indexOf('Set Task Variable DISPLAY=:33') >= 0, true, "should display export message");
 
         done();
     });
@@ -164,8 +160,6 @@ describe('XvfbV0 Task Stop Tests', function () {
         assert.equal(tr.succeeded, true, 'should have succeeded');
         assert.equal(tr.warningIssues.length, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 0, "should have no errors");
-        assert.equal(tr.stdout.indexOf('Xvfb daemon stopped') >= 0, true, "should display stopped");
-        assert.equal(tr.stdout.indexOf('Set Task Variable DISPLAY=') >= 0, true, "should display export message");
 
         done();
     });

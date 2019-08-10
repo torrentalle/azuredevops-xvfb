@@ -9,7 +9,7 @@ interface XvfbScreen {
 export class XvfbConfig {
 
     private socketPrefix:string = '/tmp/.X11-unix/X';   
-    private _display:number = 99
+    private _display:number = 0
     private _screen:XvfbScreen =  {
         width: 1280,
         height: 1024,

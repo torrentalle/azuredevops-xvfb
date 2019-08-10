@@ -7,12 +7,12 @@ let tmr: tmrm.TaskMockRunner = new tmrm.TaskMockRunner(taskPath);
 
 let a: ma.TaskLibAnswers = <ma.TaskLibAnswers> {
     "exec": {
-        "/sbin/start-stop-daemon --start --make-pidfile --pidfile /tmp/start-stop-daemon_99.pid --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x8": {
+        "/sbin/start-stop-daemon --start --make-pidfile --pidfile /tmp/start-stop-daemon_0.pid --background --exec /usr/bin/Xvfb -- :0 -ac -screen 0 1280x1024x8": {
             "code": 0,
             "stdout": "",
             "stderr": ""
         },
-        "xdpyinfo -display :99": {
+        "xdpyinfo -display :0": {
             "code": 0,
             "stdout": "",
             "stderr": ""
