@@ -18,6 +18,7 @@ async function run() {
         switch (action) {
             case  'start': {
                 actionResult = await startDaemon(xvfbConfig);
+                setDisplay(xvfbConfig.display);
                 break;
             }
             case  'stop': {
@@ -33,6 +34,12 @@ async function run() {
     catch (err) {
         tl.setResult(tl.TaskResult.Failed, err.message);
     }
+}
+
+function setDisplay(display: number|null): void {
+    let value = isNull(display)? '' : ':' + display.toString();
+    tl.setTaskVariable("DISPLAY", value );
+    console.log('Set Task Variable DISPLAY='+value)
 }
 
 async function startDaemon(config: XvfbConfig) {
