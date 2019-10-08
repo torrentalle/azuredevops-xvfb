@@ -24,7 +24,9 @@
         "Xvfb",
         "X",
         "X-Windows",
-        "xfv-run"
+        "xvfb-run",
+        "Testing",
+        "UI"
     ],
     "galleryFlags": [
         "Preview"
