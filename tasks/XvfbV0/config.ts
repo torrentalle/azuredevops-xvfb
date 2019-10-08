@@ -55,10 +55,8 @@ export class XvfbConfig {
         ).join('x');
     }
 
-    set resolution(size: string) {
-        if (size == null) {
-            return;
-        }
+    set resolution(size: string ) {
+    
         var inputReg = /^([0-9]+)x([0-9]+)x([0-9]+)$/gi 
         let match = inputReg.exec(size);
 

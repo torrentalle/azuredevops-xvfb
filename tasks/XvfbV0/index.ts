@@ -3,17 +3,21 @@ import { XvfbConfig } from './config';
 import { Daemon } from './daemon';
 import { isNull } from 'util';
 
-var debugArgs = process.argv.slice(2);
-
 async function run() {
 
     try {
 
-        var xvfbConfig: XvfbConfig = new XvfbConfig();              
-        xvfbConfig.resolution = tl.getInput('screenSize', false);
-        xvfbConfig.display = parseInt( debugArgs.length > 1 ? debugArgs[1] : tl.getInput('display', false));
+        var xvfbConfig: XvfbConfig = new XvfbConfig();
+        let screenSize = tl.getInput('screenSize', false);
+        if (screenSize != undefined) {
+            xvfbConfig.resolution = screenSize;
+        }
+        let display = tl.getInput('display', false);
+        if (display != undefined) {
+            xvfbConfig.display = parseInt(display);
+        }
 
-        let action = debugArgs.length > 0 ? debugArgs[0]: tl.getInput('action', false);
+        let action = tl.getInput('action', false);
         let actionResult;
         switch (action) {
             case  'start': {
@@ -37,7 +41,7 @@ async function run() {
 }
 
 function setDisplay(display: number|null): void {
-    let exportDisplay: boolean = debugArgs.length > 2 ? debugArgs[2]=="1" : tl.getBoolInput('exportDisplay')
+    let exportDisplay: boolean =  tl.getBoolInput('exportDisplay')
     
     if (exportDisplay) {
         let value = isNull(display)? '' : ':' + display.toString();

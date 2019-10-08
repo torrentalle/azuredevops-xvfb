@@ -10,7 +10,7 @@ export class Daemon {
     public background: boolean = false;
     public pidPrefix = '/tmp/start-stop-daemon_';
     public arguments: Array<string> = [];
-    public extraArguments: string = "";
+    public extraArguments: string | undefined;
     public pidId: number = 0;
 
     private _executable:string = "";
@@ -48,7 +48,7 @@ export class Daemon {
         }
 
         args.push('--exec', this.executable);
-        if (this.arguments.length >0 || this.extraArguments.length > 0) {
+        if (this.arguments.length  >0 || this.extraArguments != undefined) {
             args.push('--');
             this.arguments.forEach(element => {
                 args.push(element);
