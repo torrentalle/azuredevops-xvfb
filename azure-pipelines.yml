@@ -31,19 +31,18 @@ jobs:
           mergeTestResults: true
           testRunTitle: 'Extension Tests'
         condition: always()
-      - task: Npm@1
-        displayName: 'Build package'
+      - task: PackageAzureDevOpsExtension@2
         inputs:
-          command: custom
-          verbose: false
-          customCommand: 'run create'
-      - task: CopyFiles@2
-        displayName: 'Copy package'
-        inputs:
-          Contents: '*.vsix'
-          TargetFolder: 'package/'
-          OverWrite: true
-      - task: PublishPipelineArtifact@0
-        inputs:
-          artifactName: 'package'
-          targetPath: 'package'
+          rootFolder: ./
+          outputPath: '$(Build.ArtifactStagingDirectory)/extension.vsix'
+          updateTasksVersion: false
+      # - task: CopyFiles@2
+      #   displayName: 'Copy package'
+      #   inputs:
+      #     Contents: '*.vsix'
+      #     TargetFolder: 'package/'
+      #     OverWrite: true
+      # - task: PublishPipelineArtifact@0
+      #   inputs:
+      #     artifactName: 'vsix'
+      #     targetPath: 'extension.vsix'
