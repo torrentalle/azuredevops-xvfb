@@ -54,22 +54,6 @@ describe('XvfbV0 Task Config Tests', function () {
 
     });
 
-    it('should fail with invalid action', function(done: MochaDone) {
-
-        let tp = path.join(__dirname, 'XvfbV0', 'invalid_failure.js');
-        let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
-        
-        tr.run();
-        
-        assert.equal(tr.succeeded, false, 'should have failed');
-        assert.equal(tr.warningIssues.length, 0, "should have no warnings");
-        assert.equal(tr.errorIssues.length, 1, "should have 1 error issue");
-        assert.equal(tr.errorIssues[0], 'Invalid action', 'error issue output');
-
-        done();
-
-    });
-
 
 });
 
